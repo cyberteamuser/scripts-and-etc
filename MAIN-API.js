@@ -3,16 +3,14 @@
 const https = require('https');
 const readline = require('readline');
 
-// Cria uma interface para entrada de dados via terminal
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-// Solicita o IP ao usuário
 rl.question('Digite o endereço IP a ser consultado: ', (ip) => {
   if (!ip || ip.trim() === '') {
-    console.log('❌ IP inválido. Encerrando.');
+    console.log('IP inválido. Encerrando.');
     rl.close();
     return;
   }
@@ -31,7 +29,7 @@ rl.question('Digite o endereço IP a ser consultado: ', (ip) => {
         const data = JSON.parse(dados);
 
         if (data.status === 'fail') {
-          console.log(`❌ Erro: ${data.message}`);
+          console.log(`Erro: ${data.message}`);
         } else {
           console.log('\n📍 Informações do IP:');
           console.log(`🧾 IP: ${data.query}`);
@@ -42,14 +40,16 @@ rl.question('Digite o endereço IP a ser consultado: ', (ip) => {
           console.log(`📡 Provedor: ${data.isp}`);
         }
       } catch (err) {
-        console.error('❌ Erro ao processar resposta:', err.message);
+        console.error('Erro ao processar resposta:', err.message);
       }
 
       rl.close();
     });
 
   }).on('error', (err) => {
-    console.error('❌ Erro na requisição:', err.message);
+    console.error('Erro na requisição:', err.message);
     rl.close();
   });
 });
+
+<!-- BY: NonatoSec -->
